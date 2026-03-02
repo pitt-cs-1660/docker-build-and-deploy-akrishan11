@@ -32,7 +32,4 @@ jobs:
           docker build -t my-app:latest .
           docker tag my-app:latest 022673484458.dkr.ecr.us-east-1.amazonaws.com/cs1660
           docker push 022673484458.dkr.ecr.us-east-1.amazonaws.com/cs1660
-          # todo: replace this step with your docker build, tag, and push commands
-          # refer to docs/docker-commands.md for guidance on the required commands
-          echo "docker build, tag, and push commands not implemented"
-          exit 1
+  
