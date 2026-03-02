@@ -1,11 +1,17 @@
-FROM  golang:1.23
+FROM  golang:1.23 as build-stage
 
-COPY go.mod main.go templates ./
+WORKDIR /app
 
-RUN CGO_ENABLED=0 go build -o binary .
+COPY ./templates ./templates
+COPY go.mod main.go ./
+
+RUN CGO_ENABLED=0 go build -o binary ./
 
 FROM  scratch
 
-COPY binary templates ./
+WORKDIR /app
 
-CMD "./binary"
+COPY --from=build-stage /app/binary .
+COPY --from=build-stage /app/templates ./templates
+
+CMD ["./binary"]
